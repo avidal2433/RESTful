@@ -21,8 +21,8 @@ class JsonApiBuilder
     public function applySorts()
     {
         return function () {
-            if (! property_exists($this->model, 'allowedSorts')) {
-                abort(500, 'Please set the public array property $allowedSorts=[] inside '.get_class($this->model));
+            if (!property_exists($this->model, 'allowedSorts')) {
+                abort(500, 'Please set the public array property $allowedSorts=[] inside ' . get_class($this->model));
             }
 
             if (is_null($sort = request('sort'))) {
@@ -31,7 +31,7 @@ class JsonApiBuilder
 
             $sortFields = Str::of($sort)->explode(',');
 
-            foreach($sortFields as $sortField) {
+            foreach ($sortFields as $sortField) {
                 $direction = 'asc';
 
                 if (Str::of($sortField)->startsWith('-')) {
@@ -39,7 +39,7 @@ class JsonApiBuilder
                     $sortField = Str::of($sortField)->substr(1);
                 }
 
-                if ( ! collect($this->model->allowedSorts)->contains($sortField) ) {
+                if (!collect($this->model->allowedSorts)->contains($sortField)) {
                     abort(400, "Invalid Query Parameter, {$sortField} is not allowed.");
                 }
 

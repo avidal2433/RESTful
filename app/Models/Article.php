@@ -16,7 +16,6 @@ class Article extends Model
         'user_id' => 'integer',
     ];
 
-
     public function category()
     {
         return $this->belongsTo(\App\Models\Category::class);

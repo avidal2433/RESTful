@@ -32,7 +32,7 @@ class PaginateArticleTest extends TestCase
             ->assertDontSee($articles[9]->title);
 
         $response->assertJsonStructure([
-            'links' => ['first', 'last', 'prev', 'next']
+            'links' => ['first', 'last', 'prev', 'next'],
         ]);
 
         $response->assertJsonFragment([

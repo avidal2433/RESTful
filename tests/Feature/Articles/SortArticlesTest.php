@@ -60,7 +60,7 @@ class SortArticlesTest extends TestCase
             'content' => 'D Content',
         ]);
 
-        $url = route('api.v1.articles.index').'?sort=title,-content';
+        $url = route('api.v1.articles.index') . '?sort=title,-content';
 
         $this->getJson($url)->assertSeeInOrder([
             'A Title',
@@ -68,7 +68,7 @@ class SortArticlesTest extends TestCase
             'C Title',
         ]);
 
-        $url = route('api.v1.articles.index').'?sort=-content,title';
+        $url = route('api.v1.articles.index') . '?sort=-content,title';
 
         $this->getJson($url)->assertSeeInOrder([
             'D Content',

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Article;
+namespace Tests\Feature\Articles;
 
 use App\Models\Article;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,7 +11,7 @@ class ListArticleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function can_fetch_single_article(): void
+    public function it_can_fetch_single_article(): void
     {
         $article = factory(Article::class)->create();
 
@@ -34,13 +34,13 @@ class ListArticleTest extends TestCase
     }
 
     /** @test */
-    public function can_fetch_all_article(): void
+    public function it_can_fetch_all_article(): void
     {
         $article = factory(Article::class)->times('3')->create();
 
         $response = $this->getJson(route('api.v1.articles.index'));
 
-        $response->assertExactJson([
+        $response->assertJsonFragment([
             'data' => [
                 [
                     'type' => 'articles',
@@ -78,12 +78,6 @@ class ListArticleTest extends TestCase
                         'self' => route('api.v1.articles.show', $article[2])
                     ]
                 ]
-            ],
-            'links' => [
-                'self' => route('api.v1.articles.index')
-            ],
-            'meta' => [
-                'articles_count' => 3
             ]
         ]);
     }
